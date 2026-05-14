@@ -17,7 +17,7 @@ Proyecto de Tecnologías Web — Universidad de Granada (UGR).
 
 - PHP 8.2 o superior
 - Composer
-- MySQL 8 / MariaDB
+- MySQL 8 
 - (Recomendado) XAMPP
 
 ## Instalación
