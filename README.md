@@ -63,4 +63,5 @@ DB_PASSWORD=
 | Rol      | Email              | Contraseña |
 |----------|--------------------|------------|
 | Admin    | admin@cine.com     | admin123   |
-| Cliente  | user@correo.com    | user123    |
+| Cliente  | cliente@cine.com   | user1234   |
+| Cleinte  | maestro@cine.com   | maestro123 |
