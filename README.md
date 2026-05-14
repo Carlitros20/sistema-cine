@@ -64,4 +64,4 @@ DB_PASSWORD=
 |----------|--------------------|------------|
 | Admin    | admin@cine.com     | admin123   |
 | Cliente  | cliente@cine.com   | user1234   |
-| Cleinte  | maestro@cine.com   | maestro123 |
+| Cliente  | maestro@cine.com   | maestro123 |
