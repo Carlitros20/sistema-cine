@@ -124,21 +124,20 @@
                           placeholder="Escribe tu opinión...">{{ old('comment', $myRating?->comment) }}</textarea>
             </div>
 
-            <div style="display:flex; gap:.75rem; align-items:center; flex-wrap:wrap;">
-                <button type="submit" class="btn-cine btn-sm-cine">
-                    <i class="bi bi-check-lg"></i> {{ $myRating ? 'Actualizar' : 'Enviar valoración' }}
-                </button>
-                @if($myRating)
-                    <form action="{{ route('ratings.destroy', $movie->id) }}" method="POST" style="margin:0;">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn-danger-cine btn-sm-cine"
-                                onclick="return confirm('¿Eliminar tu valoración?')">
-                            <i class="bi bi-trash"></i> Eliminar
-                        </button>
-                    </form>
-                @endif
-            </div>
+            <button type="submit" class="btn-cine btn-sm-cine">
+                <i class="bi bi-check-lg"></i> {{ $myRating ? 'Actualizar' : 'Enviar valoración' }}
+            </button>
         </form>
+
+        @if($myRating)
+            <form action="{{ route('ratings.destroy', $movie->id) }}" method="POST" style="margin:0;">
+                @csrf @method('DELETE')
+                <button type="submit" class="btn-danger-cine btn-sm-cine"
+                        onclick="return confirm('¿Eliminar tu valoración?')">
+                    <i class="bi bi-trash"></i> Eliminar
+                </button>
+            </form>
+        @endif
     </div>
 @else
     <div class="alert-cine alert-cine-info" style="margin-bottom:1.5rem;">
