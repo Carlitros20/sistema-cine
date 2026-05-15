@@ -50,7 +50,7 @@ class AdminSessionController extends Controller
         $request->validate([
             'movie_id' => 'required|exists:movies,id',
             'room_id' => 'required|exists:rooms,id',
-            'start_time' => 'required|date',
+            'start_time' => 'required|date|after:now',
         ]);
 
         $session->update($request->all());

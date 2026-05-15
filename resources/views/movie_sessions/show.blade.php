@@ -180,6 +180,7 @@
 
     const grid        = document.getElementById('seatsGrid');
     const buyBtn      = document.getElementById('buyBtn');
+    const buyForm     = document.getElementById('buyForm');
     const inputsCont  = document.getElementById('seatsInputContainer');
     const timerEl     = document.getElementById('seatTimer');
     const counterVal  = document.getElementById('counterValue');
@@ -187,6 +188,10 @@
     const btnPlural   = document.getElementById('buyBtnPlural');
 
     if (!grid) return;
+
+    // Flag: ponerse a true cuando el usuario hace submit del formulario,
+    // para que beforeunload NO libere los bloqueos justo antes de comprar.
+    let isPurchasing = false;
 
     // Map: seat (int) -> { btn, expiry (ms), intervalId }
     const selected = new Map();
@@ -262,7 +267,6 @@
     }
 
     // ── Desbloquear una butaca concreta en el servidor ──────────
-    // Usamos POST con _method=DELETE para que Laravel lea el body correctamente
     async function unlockSeat(seat) {
         try {
             const body = new URLSearchParams({
@@ -325,7 +329,6 @@
         } else if (data.limit) {
             timerEl.textContent = data.message;
         } else {
-            // Butaca ocupada por otro
             btn.classList.remove('seat-free');
             btn.classList.add('seat-locked');
             btn.disabled = true;
@@ -333,9 +336,18 @@
         }
     });
 
-    // ── Al salir: liberar TODAS las butacas del usuario ─────────
-    // Sin seat específico → el servidor borra todos los bloqueos del usuario
+    // ── Submit del formulario: marcar que estamos comprando ────
+    // Sin esto, el beforeunload borraría los bloqueos justo antes
+    // de que el servidor procese la compra.
+    if (buyForm) {
+        buyForm.addEventListener('submit', function () {
+            isPurchasing = true;
+        });
+    }
+
+    // ── Al salir: liberar SOLO si NO estamos comprando ─────────
     window.addEventListener('beforeunload', () => {
+        if (isPurchasing) return;
         if (selected.size > 0) {
             const body = new URLSearchParams({
                 _token:           CSRF,

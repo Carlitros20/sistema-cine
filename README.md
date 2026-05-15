@@ -76,7 +76,7 @@ composer install
 
 Esto descarga unas 100 librerías en la carpeta `vendor/`. Tarda 1-2 minutos.
 
-Si aparece algún error sobre extensiones de PHP faltantes (`ext-mbstring`, `ext-fileinfo`, etc.), abrir `C:\xampp\php\php.ini` y descomentar las líneas correspondientes (quitar el `;` del principio).
+Si aparece algún error sobre extensiones de PHP faltantes (`ext-mbstring`, `ext-fileinfo`, ext-zip, etc.), abrir `C:\xampp\php\php.ini` y descomentar las líneas correspondientes (quitar el `;` del principio).
 
 ---
 
